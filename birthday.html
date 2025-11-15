@@ -2,29 +2,55 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Birthday Message</title>
+<title>To a dear Friend</title>
 <style>
     body {
-        background: #111;
-        color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+        background: url('Bluecontrol.jpg') no-repeat center center fixed;
+        background-size: cover;
         font-family: "Courier New", monospace;
-        padding: 40px;
+        color: #f0f0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    #message-box {
+        max-width: 800px;
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 30px;
+        border-radius: 15px;
         line-height: 1.6;
         font-size: 1.2rem;
         white-space: pre-wrap;
+        text-align: left;
     }
-    #message {
-        max-width: 800px;
-        margin: auto;
+
+    #startButton {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 15px 30px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        border: none;
+        border-radius: 10px;
+        background-color: #ff6f61;
+        color: white;
     }
 </style>
 </head>
 <body>
 
-<audio id="bgm" src="tian-tian.mp3" autoplay loop></audio>
+<button id="startButton">Click to Start 🎵</button>
+
+<audio id="bgm" src="your-music.mp3" loop></audio>
 <audio id="click" src="typing-sound.mp3"></audio>
 
-<div id="message"></div>
+<div id="message-box"></div>
 
 <script>
 const text = `To 
@@ -50,33 +76,39 @@ May joy and excitement be your whole day for everyone to attend!
 From,
 Bread`;
 
-let i = 0;
-const box = document.getElementById('message');
+const startBtn = document.getElementById('startButton');
+const bgm = document.getElementById('bgm');
 const clickSound = document.getElementById('click');
+const box = document.getElementById('message-box');
 
-document.body.addEventListener("click", () => {
-    document.getElementById("bgm").play();
-}, { once: true });
+startBtn.addEventListener('click', () => {
+ 
+    bgm.play();
 
-function typeChar() {
+    startBtn.style.display = 'none';
+
+    typeMessage();
+});
+
+let i = 0;
+function typeMessage() {
     if (i >= text.length) return;
 
     box.textContent += text[i];
 
+ 
     if (text[i] !== "\n" && text[i] !== " ") {
         clickSound.currentTime = 0;
         clickSound.play();
     }
 
-    let delay = 50;
-    if (text[i] === ",") delay = 300;
+    let delay = 50; 
+    if (text[i] === ",") delay = 300; 
     if (text[i] === "." || text[i] === "!") delay = 400;
 
     i++;
-    setTimeout(typeChar, delay);
+    setTimeout(typeMessage, delay);
 }
-
-typeChar();
 </script>
 
 </body>
