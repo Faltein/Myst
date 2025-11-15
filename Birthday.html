@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Birthday Message</title>
+<style>
+    body {
+        background: #111;
+        color: #f0f0f0;
+        font-family: "Courier New", monospace;
+        padding: 40px;
+        line-height: 1.6;
+        font-size: 1.2rem;
+        white-space: pre-wrap;
+    }
+    #message {
+        max-width: 800px;
+        margin: auto;
+    }
+</style>
+</head>
+<body>
+
+<audio id="bgm" src="tian-tian.mp3" autoplay loop></audio>
+<audio id="click" src="typing-sound.mp3"></audio>
+
+<div id="message"></div>
+
+<script>
+const text = `To 
+Myst 
+
+A friend I hold dear,
+A Happy Birthday is finally here!
+For one-and-a-half years at Empyror’s a wonderful stay,
+You’ve been part of this wonderous play.
+You made this server a memorable place,
+With chats and good times and effortless grace.
+The memories you've helped us create,
+Are bonds of friendship that feel like fate.
+Through you, new connections we've been lucky to find,
+With people we cherish, the friendly and kind.
+We wish you the best, as your journey extends,
+In all that you strive for, with family and friends.
+May success and good fortune be yours to pursue,
+In everything old, and in everything new.
+You've been a wonderful friend, truly great to the end,
+May joy and excitement be your whole day for everyone to attend!
+
+From,
+Bread`;
+
+let i = 0;
+const box = document.getElementById('message');
+const clickSound = document.getElementById('click');
+
+document.body.addEventListener("click", () => {
+    document.getElementById("bgm").play();
+}, { once: true });
+
+function typeChar() {
+    if (i >= text.length) return;
+
+    box.textContent += text[i];
+
+    if (text[i] !== "\n" && text[i] !== " ") {
+        clickSound.currentTime = 0;
+        clickSound.play();
+    }
+
+    let delay = 50;
+    if (text[i] === ",") delay = 300;
+    if (text[i] === "." || text[i] === "!") delay = 400;
+
+    i++;
+    setTimeout(typeChar, delay);
+}
+
+typeChar();
+</script>
+
+</body>
+</html>
