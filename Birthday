@@ -21,7 +21,7 @@
 </head>
 <body>
 
-<audio id="bgm" src="your-music.mp3" autoplay loop></audio>
+<audio id="bgm" src="tian-tian.mp3" autoplay loop></audio>
 <audio id="click" src="typing-sound.mp3"></audio>
 
 <div id="message"></div>
